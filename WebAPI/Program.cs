@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddDbContext<DatabaseContext>
-    (options => options.UseSqlServer("Data Source=SATAN-SERVER\\SQLEXPRESS;User ID=sa;Password=DNTSeziIS6I1mPLA1415;MultipleActiveResultSets=True; Initial Catalog=AngularFirstDB;Trust Server Certificate=true")); ;
+    (options => options.UseSqlServer("Data Source='';MultipleActiveResultSets=True; Initial Catalog=AngularFirstDB;Trust Server Certificate=true")); ;
 
 builder.Services.AddCors(options =>
 {

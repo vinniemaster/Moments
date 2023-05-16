@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Moments';
   Authenticated = true;
-  perfil = "ADM";
+  perfil = "Visitante";
 }

@@ -17,6 +17,6 @@ namespace WebAPI.Models
         public DateTime updated_at { get; set; }
 
         [NotMapped]
-        public string[] comments { get; set; }
+        public List<TB_COMMENTS> comments { get; set; }
     }
 }

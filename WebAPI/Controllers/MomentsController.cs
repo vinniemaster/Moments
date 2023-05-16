@@ -27,11 +27,13 @@ namespace WebAPI.Controllers
                 var dado = _context.TB_MOMENTS.Find(id);
                 if (dado != null) 
                 {
+                    var comments = _context.TB_COMMENTS.Where(x => x.momentId == dado.id).ToList();
+                    dado.comments = comments;
                     return new Response<TB_MOMENTS> { Message = "Momento Localizado!", Data = dado };
                 }
                 else
                 {
-                    return new Response<TB_MOMENTS> { Message = "Momento não encontrado :(", Data = new TB_MOMENTS() };
+                    return new Response<TB_MOMENTS> { Message = "Momento não encontrado :(" };
                 }
             }
             catch (Exception ex)
@@ -39,7 +41,7 @@ namespace WebAPI.Controllers
                 exception = ex;
             }
 
-            return new Response<TB_MOMENTS> { Message = $"Ocorreu um erro: {exception}", Data = new TB_MOMENTS() };
+            return new Response<TB_MOMENTS> { Message = $"Ocorreu um erro: {exception}" };
         }
 
         [HttpPost]
@@ -67,19 +69,26 @@ namespace WebAPI.Controllers
                 }
                 else if (momentdata != null && momentdata.id != 0)
                 {
-                    var newmoment = new TB_MOMENTS
+                    var momentExistent = _context.TB_MOMENTS.Find(momentdata.id);
+                    if(momentExistent != null)
                     {
-                        id = (int)momentdata.id,
-                        title = momentdata.title,
-                        description = momentdata.description,
-                        image = momentdata?.image,
-                        created_at = (DateTime)momentdata.created_at,
-                        updated_at = DateTime.Now
-                    };
-                    _context.TB_MOMENTS.Add(newmoment);
-                    _context.SaveChanges();
+                        momentExistent.title = !string.IsNullOrEmpty(momentdata.title) ? momentdata.title : momentExistent.title;
+                        momentExistent.description = !string.IsNullOrEmpty(momentdata.description) ? momentdata.description : momentExistent.description;
+                        momentExistent.image = !string.IsNullOrEmpty(momentdata.image) ? momentdata.image : momentExistent.image;
+                        momentExistent.updated_at = DateTime.Now;
 
-                    return new Response<TB_MOMENTS> { Message = "Momento Atualizado com Sucesso!", Data = newmoment };
+
+                        _context.TB_MOMENTS.Update(momentExistent);
+                        _context.SaveChanges();
+                        return new Response<TB_MOMENTS> { Message = "Momento Atualizado com Sucesso!", Data = momentExistent };
+                    }
+                    else
+                    {
+                        return new Response<TB_MOMENTS> { Message = "Momento não encontrado!" };
+
+                    }
+
+                    
                 }
 
             }
@@ -88,7 +97,7 @@ namespace WebAPI.Controllers
                 exception = e;
             }
 
-            return new Response<TB_MOMENTS> { Message = $"Ocorreu um erro: {exception}", Data = new TB_MOMENTS() };
+            return new Response<TB_MOMENTS> { Message = $"Ocorreu um erro: {exception}" };
         }
 
         [HttpDelete, Route("{id}")]
@@ -103,11 +112,11 @@ namespace WebAPI.Controllers
                     _context.TB_MOMENTS.Remove(dado);
                     _context.SaveChanges();
 
-                    return new Response<TB_MOMENTS> { Message = "Momento excluído com sucesso!", Data = new TB_MOMENTS() };
+                    return new Response<TB_MOMENTS> { Message = "Momento excluído com sucesso!" };
                 }
                 else
                 {
-                    return new Response<TB_MOMENTS> { Message = "Momento não encontrado :(", Data = new TB_MOMENTS() };
+                    return new Response<TB_MOMENTS> { Message = "Momento não encontrado :(" };
                 }
             }
             catch (Exception ex)
@@ -115,7 +124,7 @@ namespace WebAPI.Controllers
                 exception = ex;
             }
 
-            return new Response<TB_MOMENTS> { Message = $"Ocorreu um erro: {exception}", Data = new TB_MOMENTS() };
+            return new Response<TB_MOMENTS> { Message = $"Ocorreu um erro: {exception}" };
         }
 
 

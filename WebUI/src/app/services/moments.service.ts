@@ -46,4 +46,11 @@ export class MomentsService {
   removeMoment(id: Number){
     return this.http.delete<APIResponse<Moments>>(`${this.apiUrl}/${id}`, this.httpopt)
   }
+
+
+  updateMoment(moment: Moments){
+
+    this.post = { data : moment}
+    return this.http.post<APIResponse<Moments>>(this.apiUrl, this.post, this.httpopt)
+  }
 }

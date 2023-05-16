@@ -12,20 +12,21 @@ import { Helpers } from 'src/app/Helpers/Helpers';
 })
 export class MomentFormComponent {
   @Output() onSubmit = new EventEmitter<Moments>();
-  @Input() btnText!: string;
-  
+  @Input() btnText!: String;
+  @Input() momentData: Moments | null = null;
+
   base64!: string;
 
   momentForm!: FormGroup;
-
+  
   
 
   ngOnInit(): void{
     this.momentForm = new FormGroup({
-      id: new FormControl(0),
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      image: new FormControl(''),
+      id: new FormControl(this.momentData? this.momentData.id : 0),
+      title: new FormControl(this.momentData? this.momentData.title : '', [Validators.required]),
+      description: new FormControl(this.momentData? this.momentData.description :'', [Validators.required]),
+      image: new FormControl('')
     })
   }
 
@@ -37,7 +38,7 @@ export class MomentFormComponent {
   get description(){
     return this.momentForm.get('description')!;
     
-  }
+  } 
   constructor(private helpers: Helpers){}
   async onFileSelected(event: any){
     const file: File = event.target.files[0];

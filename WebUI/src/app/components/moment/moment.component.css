@@ -28,6 +28,7 @@ margin: 0 auto 1em;
     background: none;
     font-size: 16px;
     transition: 0.4s;
+    font-family: "Poppins", sans-serif;
 }
 .actions a{
     transition: 0.4s;
@@ -50,4 +51,26 @@ margin: 0 auto 1em;
 .comments {
     margin-bottom: 1em;
     padding: 1.5em 0;
+    width: 100%;
+    border-bottom: 1px solid #ccc;  
   }
+
+.comments .commentbtn{
+    border: none;
+    background: none;
+    font-size: 17px;
+    font-family: "Poppins", sans-serif;
+}
+.comments .comment-container .author{
+    color:#ccc;
+    text-align: left;
+    margin-bottom: -20px;
+}
+.comments .comment-container .comment{
+    text-align: left;
+    font-size: 20px;
+}
+.validation-error p{
+    color: #DC3545;
+    font-size: 15px;
+}

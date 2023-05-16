@@ -1,0 +1,15 @@
+<div class="navbar">
+    <div class="logo_content">
+        <div class="logo">
+            <i class='bx bxs-drink' ></i>
+          <div class="logo_name"><a routerLink="/">Moments</a></div>
+        </div>
+      </div>
+    <ul class="nav_list">
+        <li *ngFor="let modulo of modulos">
+            <a routerLink={{modulo.routerlink}}>
+                {{modulo.name}} 
+            </a>
+        </li>
+    </ul>
+</div>

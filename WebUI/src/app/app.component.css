@@ -1,0 +1,8 @@
+.bodycontent{
+    position:absolute;
+    margin-top: 50px;
+    overflow-y: auto;
+    height: calc(100% - 50px);
+    width: 100%;
+
+}

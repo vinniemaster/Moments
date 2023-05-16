@@ -1,0 +1,23 @@
+<div class="moment" *ngIf="moment">
+    <h1>{{moment.title}}</h1>
+    <img [src]="moment.image" [alt]="moment.title">
+    <div class="about-moment">
+        <h3>Sobre este momento:</h3>
+        <p>{{moment.description}}</p>
+        <div class="dates">
+            <i>Criado em: {{moment.created_at | date: "dd/MM/yyyy HH:mm "}}</i>
+            <br/>
+            <i>Editado em: {{moment.updated_at | date: "dd/MM/yyyy HH:mm"}}</i>
+        </div>
+    </div>
+    <div class="actions">
+        <h3>Ações:</h3>
+        <a routerLink="/moments/edit/{{moment.id}}" class="edit-btn"><i class='bx bx-edit'></i>Editar</a>
+        <button class="remove-btn" (click)="removeHandler(moment.id!)">
+            <i class='bx bx-trash' ></i> Excluir
+          </button>
+    </div>
+    <div class="comments">
+        <h3>Comentários (0):</h3>
+    </div>
+</div>
